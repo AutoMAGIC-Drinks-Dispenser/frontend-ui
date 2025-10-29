@@ -3,32 +3,24 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { MainMenu } from './components/main_menu';
 import "./App.css";
 import "./index.css";
-import { LoginPage } from './components/loginPage';
+// import { LoginPage } from './components/loginPage';
 
 // Auth guard component
-const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const userId = sessionStorage.getItem('userId');
+// const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+//   const userId = sessionStorage.getItem('userId');
   
-  if (!userId) {
-    return <Navigate to="/" replace />;
-  }
+//   if (!userId) {
+//     return <Navigate to="/" replace />;
+//   }
   
-  return <>{children}</>;
-};
+//   return <>{children}</>;
+// };
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route 
-          path="/main" 
-          element={
-            <ProtectedRoute>
-              <MainMenu />
-            </ProtectedRoute>
-          } 
-        />
+          <Route path="/" element={<MainMenu />} />
       </Routes>
     </Router>
   );
