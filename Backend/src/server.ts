@@ -3,6 +3,7 @@ import mysql from 'mysql2/promise';
 import cors from 'cors';
 import { WebSocket, WebSocketServer } from 'ws';
 import { arduinoService } from './modules/arduino/arduinoService.ts';
+import { arduinoRouter } from './modules/arduino/arduinoRoutes.ts';
 
 const app = express();
 app.use(cors());
@@ -34,6 +35,9 @@ pool.getConnection()
 app.get('/api/test', (req, res) => {
   res.json({ message: 'Backend is running!' });
 });
+
+// Register Arduino routes
+app.use('/api/arduino', arduinoRouter);
 
 // Get all users
 app.get('/api/users', async (req, res) => {

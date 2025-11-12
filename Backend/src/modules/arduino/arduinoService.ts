@@ -53,6 +53,29 @@ class ArduinoService extends EventEmitter {
   public isConnected(): boolean {
     return this.serialPort?.isOpen ?? false;
   }
+
+  /**
+   * Send a command to Arduino via UART
+   * @param command The command to send (e.g., 'single', 'double')
+   */
+  public sendCommand(command: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (!this.serialPort || !this.serialPort.isOpen) {
+        reject(new Error('Arduino is not connected'));
+        return;
+      }
+
+      this.serialPort.write(command + '\n', (error) => {
+        if (error) {
+          console.error('Error sending command to Arduino:', error);
+          reject(error);
+        } else {
+          console.log(`Sent command to Arduino: ${command}`);
+          resolve();
+        }
+      });
+    });
+  }
 }
 
 export const arduinoService = new ArduinoService();

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { SpejlaegPopupModal } from "./dispense_button_modal";
-import { sendDataToArduino } from "./communication/serialService";
-import { incrementAlltime } from "./communication/api"; 
+import { dispenseEgg, incrementAlltime } from "./communication/api"; 
 
 export const SpejlaegButtonComponent: React.FC = () => {
   const [showPopup, setShowPopup] = useState<"single" | "double" | null>(null);
@@ -33,8 +32,8 @@ export const SpejlaegButtonComponent: React.FC = () => {
         // Increment the alltime counter
         await incrementAlltime(Number(userId));
         
-        // If increment was successful, send to Arduino
-        sendDataToArduino(showPopup);
+        // If increment was successful, send to Arduino via backend
+        await dispenseEgg(showPopup);
         
         // Close the popup
         setShowPopup(null);

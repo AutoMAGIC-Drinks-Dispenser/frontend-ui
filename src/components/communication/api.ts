@@ -29,6 +29,11 @@ interface IncrementResponse {
   newValue: number;
 }
 
+interface DispenseResponse {
+  success: boolean;
+  message: string;
+}
+
 const API_BASE_URL = 'http://localhost:3000/api';
 
 // Existing functions
@@ -86,6 +91,22 @@ export async function removeUser(id: number): Promise<RemoveUserResponse> {
   if (!response.ok) {
     const errorData = await response.json() as ApiError;
     throw new Error(errorData.error || 'Failed to remove user');
+  }
+  return response.json();
+}
+
+export async function dispenseEgg(command: 'single' | 'double'): Promise<DispenseResponse> {
+  const response = await fetch(`${API_BASE_URL}/arduino/dispense`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ command })
+  });
+  
+  if (!response.ok) {
+    const errorData = await response.json() as ApiError;
+    throw new Error(errorData.error || 'Failed to send dispense command');
   }
   return response.json();
 }
