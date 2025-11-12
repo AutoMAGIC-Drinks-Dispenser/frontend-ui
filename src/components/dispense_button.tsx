@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SpejlaegPopupModal } from "./dispense_button_modal";
-import { sendDataToArduino } from "./communication/web_serial_com";
+import { sendDataToArduino } from "./communication/serialService";
 import { incrementAlltime } from "./communication/api"; 
 
 export const SpejlaegButtonComponent: React.FC = () => {

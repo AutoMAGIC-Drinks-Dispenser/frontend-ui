@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { SpejlaegButtonComponent } from './dispense_button';
 import { HeaderComponent } from './header.tsx';
 import { RefillPremixModal, RefillPostmixModal } from './menu/refill_modal';
+import { SerialMonitor } from './communication/serial_monitor';
 
 export const MainMenu: React.FC = () => {
   const [showRefillPostmix, setShowRefillPostmix] = useState(false);
   const [showRefillPremix, setShowRefillPremix] = useState(false);
+  const [showSerialMonitor, setShowSerialMonitor] = useState(false);
 
   useEffect(() => {
     // Connect to WebSocket server to listen for refill events
@@ -40,6 +42,16 @@ export const MainMenu: React.FC = () => {
       <div>
         <HeaderComponent />
       </div>
+      
+      {/* Serial Monitor Toggle Button - Fixed position bottom right */}
+      <button
+        onClick={() => setShowSerialMonitor(true)}
+        className="fixed bottom-4 right-4 bg-zinc-800 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-zinc-700 text-sm z-40"
+        title="Open Serial Monitor"
+      >
+        📊 Serial Monitor
+      </button>
+
       <SpejlaegButtonComponent />
 
       {/* Modals */}
@@ -50,6 +62,12 @@ export const MainMenu: React.FC = () => {
       <RefillPremixModal
         showModal={showRefillPremix}
         onClose={() => setShowRefillPremix(false)}
+      />
+      
+      {/* Serial Monitor */}
+      <SerialMonitor
+        isOpen={showSerialMonitor}
+        onClose={() => setShowSerialMonitor(false)}
       />
     </div>
   );

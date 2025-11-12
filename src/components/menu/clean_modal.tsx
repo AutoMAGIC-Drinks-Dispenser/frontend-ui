@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { sendDataToArduino } from "./../communication/web_serial_com";
+import { sendDataToArduino } from "../communication/serialService";
 import { PopupProps } from "../dispense_button_modal";
 
 

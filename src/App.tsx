@@ -20,15 +20,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route 
-          path="/main" 
-          element={
-            // <ProtectedRoute>
-              <MainMenu />
-            // </ProtectedRoute>
-          } 
-        />
+        <Route path="/" element={<MainMenu />} />
       </Routes>
     </Router>
   );
