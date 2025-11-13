@@ -2,8 +2,8 @@ import express from 'express';
 import mysql from 'mysql2/promise';
 import cors from 'cors';
 import { WebSocket, WebSocketServer } from 'ws';
-import { arduinoService } from './modules/arduino/arduinoService.ts';
-import { arduinoRouter } from './modules/arduino/arduinoRoutes.ts';
+import { arduinoService } from './modules/arduino/arduinoService.js';
+import { arduinoRouter } from './modules/arduino/arduinoRoutes.js';
 
 const app = express();
 app.use(cors());

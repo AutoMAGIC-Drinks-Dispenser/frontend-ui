@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { arduinoService } from './arduinoService';
+import { arduinoService } from './arduinoService.js';
 
 const router = Router();
 
